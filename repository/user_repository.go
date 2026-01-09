@@ -4,8 +4,8 @@ import (
 	"context"
 	"math"
 
-	"github.com/tapeds/go-fiber-template/dto"
-	"github.com/tapeds/go-fiber-template/entity"
+	"github.com/jejevj/go-aiocap/dto"
+	"github.com/jejevj/go-aiocap/entity"
 	"gorm.io/gorm"
 )
 

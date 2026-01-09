@@ -2,9 +2,9 @@ package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/tapeds/go-fiber-template/controller"
-	"github.com/tapeds/go-fiber-template/middleware"
-	"github.com/tapeds/go-fiber-template/service"
+	"github.com/jejevj/go-aiocap/controller"
+	"github.com/jejevj/go-aiocap/middleware"
+	"github.com/jejevj/go-aiocap/service"
 )
 
 func User(route fiber.Router, userController controller.UserController, jwtService service.JWTService) {

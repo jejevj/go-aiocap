@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/tapeds/go-fiber-template/entity"
+	"github.com/jejevj/go-aiocap/entity"
 	"gorm.io/gorm"
 )
 

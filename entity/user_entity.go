@@ -2,7 +2,7 @@ package entity
 
 import (
 	"github.com/google/uuid"
-	"github.com/tapeds/go-fiber-template/helpers"
+	"github.com/jejevj/go-aiocap/helpers"
 	"gorm.io/gorm"
 )
 

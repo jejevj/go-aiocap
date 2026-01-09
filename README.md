@@ -45,7 +45,7 @@ There are 2 ways to do running
 ### Without Docker
 1. Clone the repository or **Use This Template**
   ```bash
-  git clone https://github.com/tapeds/go-fiber-template.git
+  git clone https://github.com/jejevj/go-aiocap.git
   ```
 2. Navigate to the project directory:
   ```bash

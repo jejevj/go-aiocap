@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/tapeds/go-fiber-template/constants"
+	"github.com/jejevj/go-aiocap/constants"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

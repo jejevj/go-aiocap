@@ -11,12 +11,12 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/tapeds/go-fiber-template/constants"
-	"github.com/tapeds/go-fiber-template/dto"
-	"github.com/tapeds/go-fiber-template/entity"
-	"github.com/tapeds/go-fiber-template/helpers"
-	"github.com/tapeds/go-fiber-template/repository"
-	"github.com/tapeds/go-fiber-template/utils"
+	"github.com/jejevj/go-aiocap/constants"
+	"github.com/jejevj/go-aiocap/dto"
+	"github.com/jejevj/go-aiocap/entity"
+	"github.com/jejevj/go-aiocap/helpers"
+	"github.com/jejevj/go-aiocap/repository"
+	"github.com/jejevj/go-aiocap/utils"
 )
 
 type (

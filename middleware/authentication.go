@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/tapeds/go-fiber-template/dto"
-	"github.com/tapeds/go-fiber-template/service"
-	"github.com/tapeds/go-fiber-template/utils"
+	"github.com/jejevj/go-aiocap/dto"
+	"github.com/jejevj/go-aiocap/service"
+	"github.com/jejevj/go-aiocap/utils"
 )
 
 func Authenticate(jwtService service.JWTService) fiber.Handler {

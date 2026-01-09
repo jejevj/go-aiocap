@@ -18,7 +18,7 @@ func CORSMiddleware() fiber.Handler {
 
 	return cors.New(cors.Config{
 		AllowOrigins:     origins,
-		AllowCredentials: true,
+		AllowCredentials: false,
 		AllowHeaders:     "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With",
 		AllowMethods:     "POST, HEAD, PATCH, OPTIONS, GET, PUT, DELETE",
 	})

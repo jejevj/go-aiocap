@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/tapeds/go-fiber-template/config"
+	"github.com/jejevj/go-aiocap/config"
 	"gopkg.in/gomail.v2"
 )
 

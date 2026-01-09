@@ -8,11 +8,19 @@
     "is_verified": true
   },
   {
-    "name": "user",
+    "name": "ops",
     "telp_number": "08123456789",
-    "email": "user1234@gmail.com",
-    "password": "user1234",
-    "role": "user",
+    "email": "ops1234@gmail.com",
+    "password": "ops1234",
+    "role": "ops",
+    "is_verified": true
+  },
+  {
+    "name": "sales",
+    "telp_number": "08123456789",
+    "email": "sales1234@gmail.com",
+    "password": "sales1234",
+    "role": "sales",
     "is_verified": true
   }
 ]

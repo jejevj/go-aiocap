@@ -5,13 +5,13 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/tapeds/go-fiber-template/cmd"
-	"github.com/tapeds/go-fiber-template/config"
-	"github.com/tapeds/go-fiber-template/controller"
-	"github.com/tapeds/go-fiber-template/middleware"
-	"github.com/tapeds/go-fiber-template/repository"
-	"github.com/tapeds/go-fiber-template/routes"
-	"github.com/tapeds/go-fiber-template/service"
+	"github.com/jejevj/go-aiocap/cmd"
+	"github.com/jejevj/go-aiocap/config"
+	"github.com/jejevj/go-aiocap/controller"
+	"github.com/jejevj/go-aiocap/middleware"
+	"github.com/jejevj/go-aiocap/repository"
+	"github.com/jejevj/go-aiocap/routes"
+	"github.com/jejevj/go-aiocap/service"
 )
 
 func main() {
