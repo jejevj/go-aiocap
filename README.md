@@ -101,3 +101,9 @@ To seed the database with initial data:
 go run main.go --seed
 ```
 This command will populate the database with initial data using the seeders defined in your application.
+
+#### Init The Swag
+```bash
+swag init
+```
+This command will creating the docs folder with the swagger documentation.
