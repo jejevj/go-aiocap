@@ -12,8 +12,15 @@ import (
 	"github.com/jejevj/go-aiocap/repository"
 	"github.com/jejevj/go-aiocap/routes"
 	"github.com/jejevj/go-aiocap/service"
+	"github.com/swaggo/fiber-swagger" // Add this import
+	_ "github.com/jejevj/go-aiocap/docs" // Add this import - this is important!
 )
 
+// @title           Go AIoCap API
+// @version         1.0
+// @description     API documentation for Go AIoCap application
+// @host      localhost:8888
+// @ basePath    /
 func main() {
 	db := config.SetUpDatabaseConnection()
 	defer config.CloseDatabaseConnection(db)
@@ -42,6 +49,9 @@ func main() {
 
 	// routes
 	routes.User(apiGroup, userController, jwtService)
+
+	// Add Swagger route
+	server.Get("/swagger/*", fiberSwagger.WrapHandler)
 
 	server.Static("/assets", "./assets")
 

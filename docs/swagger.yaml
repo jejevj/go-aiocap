@@ -1,0 +1,282 @@
+definitions:
+  dto.SendVerificationEmailRequest:
+    properties:
+      email:
+        type: string
+    required:
+    - email
+    type: object
+  dto.UserCreateRequest:
+    type: object
+  dto.UserLoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  dto.UserLoginResponse:
+    properties:
+      role:
+        type: string
+      token:
+        type: string
+    type: object
+  dto.UserPaginationResponse:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/dto.UserResponse'
+        type: array
+      max_page:
+        type: integer
+      page:
+        type: integer
+      per_page:
+        type: integer
+    type: object
+  dto.UserResponse:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      image_url:
+        type: string
+      is_verified:
+        type: boolean
+      name:
+        type: string
+      role:
+        type: string
+      telp_number:
+        type: string
+    type: object
+  dto.UserUpdateRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      telp_number:
+        type: string
+    type: object
+  dto.UserUpdateResponse:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      is_verified:
+        type: boolean
+      name:
+        type: string
+      role:
+        type: string
+      telp_number:
+        type: string
+    type: object
+  dto.VerifyEmailRequest:
+    properties:
+      token:
+        type: string
+    required:
+    - token
+    type: object
+  dto.VerifyEmailResponse:
+    properties:
+      email:
+        type: string
+      is_verified:
+        type: boolean
+    type: object
+  utils.Response:
+    properties:
+      data: {}
+      error: {}
+      message:
+        type: string
+      meta: {}
+      status:
+        type: boolean
+    type: object
+host: localhost:8888
+info:
+  contact: {}
+  description: API documentation for Go AIoCap application
+  title: Go AIoCap API
+  version: "1.0"
+paths:
+  /api/user:
+    delete:
+      consumes:
+      - application/json
+      description: Delete user account
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.Response'
+      security:
+      - Bearer: []
+      summary: Delete user
+      tags:
+      - users
+    get:
+      consumes:
+      - application/json
+      description: Get list of all users with pagination
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Items per page
+        in: query
+        name: per_page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserPaginationResponse'
+      summary: Get all users
+      tags:
+      - users
+    patch:
+      consumes:
+      - application/json
+      description: Update user information
+      parameters:
+      - description: User data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserUpdateResponse'
+      security:
+      - Bearer: []
+      summary: Update user
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: Create a new user account
+      parameters:
+      - description: User data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserResponse'
+      summary: Register new user
+      tags:
+      - users
+  /api/user/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate user and return JWT token
+      parameters:
+      - description: Login credentials
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserLoginResponse'
+      summary: User login
+      tags:
+      - users
+  /api/user/me:
+    get:
+      consumes:
+      - application/json
+      description: Get user information for the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserResponse'
+      security:
+      - Bearer: []
+      summary: Get current user
+      tags:
+      - users
+  /api/user/send_verification_email:
+    post:
+      consumes:
+      - application/json
+      description: Send verification email to user
+      parameters:
+      - description: Email address
+        in: body
+        name: email
+        required: true
+        schema:
+          $ref: '#/definitions/dto.SendVerificationEmailRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.Response'
+      summary: Send verification email
+      tags:
+      - users
+  /api/user/verify_email:
+    post:
+      consumes:
+      - application/json
+      description: Verify user email with token
+      parameters:
+      - description: Verification token
+        in: body
+        name: token
+        required: true
+        schema:
+          $ref: '#/definitions/dto.VerifyEmailRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.VerifyEmailResponse'
+      summary: Verify email
+      tags:
+      - users
+swagger: "2.0"
