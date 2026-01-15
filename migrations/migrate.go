@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/jejevj/go-aiocap/entity"
+	"github.com/jejevj/go-aiocap/entity/course"
 	"gorm.io/gorm"
 )
 
@@ -23,6 +24,9 @@ func Migrate(db *gorm.DB) error {
 
 	if err := db.AutoMigrate(
 		&entity.User{},
+		&course.CourseCustomer{},
+		&course.Course{},
+		&course.CourseKehadiran{},
 	); err != nil {
 		return err
 	}

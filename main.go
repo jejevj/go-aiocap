@@ -4,23 +4,21 @@ import (
 	"log"
 	"os"
 
+	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/jejevj/go-aiocap/cmd"
 	"github.com/jejevj/go-aiocap/config"
 	"github.com/jejevj/go-aiocap/controller"
+	_ "github.com/jejevj/go-aiocap/docs"
 	"github.com/jejevj/go-aiocap/middleware"
 	"github.com/jejevj/go-aiocap/repository"
 	"github.com/jejevj/go-aiocap/routes"
 	"github.com/jejevj/go-aiocap/service"
-	"github.com/swaggo/fiber-swagger" // Add this import
-	_ "github.com/jejevj/go-aiocap/docs" // Add this import - this is important!
+	fiberSwagger "github.com/swaggo/fiber-swagger"
 )
 
-// @title           Go AIoCap API
-// @version         1.0
-// @description     API documentation for Go AIoCap application
-// @host      localhost:8888
-// @ basePath    /
 func main() {
 	db := config.SetUpDatabaseConnection()
 	defer config.CloseDatabaseConnection(db)
@@ -33,24 +31,43 @@ func main() {
 	var (
 		jwtService service.JWTService = service.NewJWTService()
 
-		// Repository
 		userRepository repository.UserRepository = repository.NewUserRepository(db)
 
-		// Service
 		userService service.UserService = service.NewUserService(userRepository, jwtService)
 
-		// Controller
 		userController controller.UserController = controller.NewUserController(userService)
 	)
 
-	server := fiber.New()
+	server := fiber.New(fiber.Config{
+		JSONEncoder: json.Marshal,
+		JSONDecoder: json.Unmarshal,
+	})
+	server.Use(logger.New(logger.Config{
+		CustomTags: map[string]logger.LogFunc{
+			"custom_tag": func(output logger.Buffer, c *fiber.Ctx, data *logger.Data, extraParam string) (int, error) {
+				return output.WriteString("it is a custom tag")
+			},
+		},
+	}))
+
+	file, err := os.OpenFile("./endpoint.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer file.Close()
+	server.Use(logger.New(logger.Config{
+		Output: file,
+	}))
+
+	server.Get("/metrics", monitor.New())
+
+	server.Get("/metrics", monitor.New(monitor.Config{Title: "MyService Metrics Page"}))
+
 	server.Use(middleware.CORSMiddleware())
 	apiGroup := server.Group("/api")
 
-	// routes
 	routes.User(apiGroup, userController, jwtService)
 
-	// Add Swagger route
 	server.Get("/swagger/*", fiberSwagger.WrapHandler)
 
 	server.Static("/assets", "./assets")

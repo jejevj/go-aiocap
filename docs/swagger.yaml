@@ -223,6 +223,13 @@ paths:
       consumes:
       - application/json
       description: Get user information for the authenticated user
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -231,7 +238,7 @@ paths:
           schema:
             $ref: '#/definitions/dto.UserResponse'
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Get current user
       tags:
       - users

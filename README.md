@@ -101,6 +101,12 @@ To seed the database with initial data:
 go run main.go --seed
 ```
 This command will populate the database with initial data using the seeders defined in your application.
+#### Fresh Init Database 
+To seed the database with initial data:
+```bash
+go run main.go --migrate-fresh
+```
+This command will drop all the database with initial apply migration in your application.
 
 #### Init The Swag
 ```bash

@@ -185,7 +185,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "Get user information for the authenticated user",
@@ -199,6 +199,16 @@ const docTemplate = `{
                     "users"
                 ],
                 "summary": "Get current user",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",

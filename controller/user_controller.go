@@ -95,7 +95,8 @@ func (c *userController) GetAllUser(ctx *fiber.Ctx) error {
 // @Tags users
 // @Accept json
 // @Produce json
-// @Security Bearer
+// @security BearerAuth
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Success 200 {object} dto.UserResponse
 // @Router /api/user/me [get]
 func (c *userController) Me(ctx *fiber.Ctx) error {
