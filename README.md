@@ -23,7 +23,7 @@ Clean Architecture proposes a structured application design with several layers 
 - **Utils**: Short for "utility functions" or "utility tools," this refers to a collection of functions or tools used for common tasks such as data validation, string manipulation, security, error handling, database connection management, and more. Utils help avoid code duplication, improve code readability, and make application development more efficient by providing commonly used and reusable functions.
 
 ## Prerequisite 🏆
-- Go Version `>= go 1.20`
+- Go Version `>= go 1.25`
 - PostgreSQL Version `>= version 15.0`
 
 ## How To Use
