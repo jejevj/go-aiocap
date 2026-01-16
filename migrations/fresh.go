@@ -3,16 +3,16 @@ package migrations
 import (
 	"log"
 
-	"github.com/jejevj/go-aiocap/entity"
 	"github.com/jejevj/go-aiocap/entity/course"
 	"gorm.io/gorm"
 )
 
 func dropAllTables(db *gorm.DB) error {
 	if err := db.Migrator().DropTable(
-		&entity.User{},
+		// &entity.User{},
 		&course.CourseCustomer{},
 		&course.Course{},
+		&course.CoursePeserta{},
 		&course.CourseKehadiran{},
 	); err != nil {
 		return err

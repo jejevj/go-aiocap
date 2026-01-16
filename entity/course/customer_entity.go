@@ -8,9 +8,10 @@ import (
 
 type CourseCustomer struct {
 	ID              uuid.UUID `gorm:"type:uuid;primary_key;default:uuid_generate_v4()" json:"id"`
-	CustomerName    string    `json:"customer_name"`
+	CustomerName    string    `gorm:"uniqueIndex" json:"customer_name"`
+	CustomerEmail   string    `gorm:"uniqueIndex" json:"customer_email"`
 	ContactName     string    `json:"contact_name"`
-	PhoneNumber     string    `json:"phone_number"`
+	PhoneNumber     string    `gorm:"uniqueIndex" json:"phone_number"`
 	CustomerAddress string    `json:"customer_address"`
 	CreatedByID     uuid.UUID `gorm:"type:uuid;not null" json:"created_by_id"`
 	ChangedByID     uuid.UUID `gorm:"type:uuid;not null" json:"changed_by_id"`

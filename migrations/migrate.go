@@ -27,6 +27,7 @@ func Migrate(db *gorm.DB) error {
 		&course.CourseCustomer{},
 		&course.Course{},
 		&course.CourseKehadiran{},
+		&course.CoursePeserta{},
 	); err != nil {
 		return err
 	}

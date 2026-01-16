@@ -32,10 +32,16 @@ func main() {
 		jwtService service.JWTService = service.NewJWTService()
 
 		userRepository repository.UserRepository = repository.NewUserRepository(db)
-
-		userService service.UserService = service.NewUserService(userRepository, jwtService)
-
+		userService    service.UserService       = service.NewUserService(userRepository, jwtService)
 		userController controller.UserController = controller.NewUserController(userService)
+
+		courseCustomerRepository repository.CourseCustomerRepository = repository.NewCourseCustomerRepository(db)
+		courseCustomerService    service.CourseCustomerService       = service.NewCourseCustomerService(courseCustomerRepository, jwtService)
+		courseCustomerController controller.CourseCustomerController = controller.NewCourseCustomerController(courseCustomerService)
+
+		courseRepository repository.CourseRepository = repository.NewCourseRepository(db)
+		courseService    service.CourseService       = service.NewCourseService(courseRepository, courseCustomerRepository, jwtService)
+		courseController controller.CourseController = controller.NewCourseController(courseService)
 	)
 
 	server := fiber.New(fiber.Config{
@@ -59,18 +65,17 @@ func main() {
 		Output: file,
 	}))
 
-	server.Get("/metrics", monitor.New())
-
-	server.Get("/metrics", monitor.New(monitor.Config{Title: "MyService Metrics Page"}))
-
 	server.Use(middleware.CORSMiddleware())
 	apiGroup := server.Group("/api")
 
 	routes.User(apiGroup, userController, jwtService)
+	routes.CourseCustomer(apiGroup, courseCustomerController, jwtService)
+	routes.Course(apiGroup, courseController, jwtService)
 
 	server.Get("/swagger/*", fiberSwagger.WrapHandler)
-
 	server.Static("/assets", "./assets")
+	server.Get("/metrics", monitor.New())
+	server.Get("/metrics", monitor.New(monitor.Config{Title: "MyService Metrics Page"}))
 
 	port := os.Getenv("PORT")
 	if port == "" {
