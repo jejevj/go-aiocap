@@ -113,3 +113,13 @@ This command will drop all the database with initial apply migration in your app
 swag init
 ```
 This command will creating the docs folder with the swagger documentation.
+
+
+## Step By Step to Develope
+1. Create Entity
+2. Do Migration
+3. Create DTO
+4. Create Repository
+5. Create Service
+6. Create Controller
+7. Register all of it on main.go
