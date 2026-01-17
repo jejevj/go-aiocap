@@ -18,6 +18,7 @@ type (
 		GetCourseCustomerById(ctx context.Context, id string) (dto.CourseCustomerResponse, error)
 		UpdateCourseCustomer(ctx context.Context, req dto.CourseCustomerUpdateRequest, userId string) (dto.CourseCustomerResponse, error)
 		ExportCourseCustomerToExcel(ctx context.Context, req dto.PaginationRequest) ([]byte, error)
+		DeleteCourseCustomer(ctx context.Context, req dto.CourseCustomerGetDetailsRequest, id string) error
 	}
 
 	courseCustomerService struct {
@@ -159,6 +160,21 @@ func (s *courseCustomerService) UpdateCourseCustomer(ctx context.Context, req dt
 		CreatedByID:     userUpdate.CreatedByID,
 		ChangedByID:     userUpdate.ChangedByID,
 	}, nil
+}
+
+func (s *courseCustomerService) DeleteCourseCustomer(ctx context.Context, req dto.CourseCustomerGetDetailsRequest, id string) error {
+
+	user, err := s.customerRepo.GetCourseCustomerById(ctx, id)
+	if err != nil {
+		return dto.ErrUserNotFound
+	}
+
+	err = s.customerRepo.DeleteCourseCustomer(ctx, user.ID.String())
+	if err != nil {
+		return dto.ErrDeleteUser
+	}
+
+	return nil
 }
 
 // Export to Excel functionality

@@ -19,6 +19,7 @@ type (
 		GetCourseCustomerById(ctx context.Context, id string) (course.CourseCustomer, error)
 		UpdateCourseCustomer(ctx context.Context, customer course.CourseCustomer) (course.CourseCustomer, error)
 		GetAllCourseCustomerForExport(ctx context.Context, req dto.PaginationRequest) ([]dto.CourseCustomerExport, error)
+		DeleteCourseCustomer(ctx context.Context, id string) error
 	}
 	courseCustomerRepository struct {
 		db *gorm.DB
@@ -137,6 +138,16 @@ func (r *courseCustomerRepository) UpdateCourseCustomer(ctx context.Context, cus
 	}
 
 	return customer, nil
+}
+
+func (r *courseCustomerRepository) DeleteCourseCustomer(ctx context.Context, id string) error {
+	tx := r.db
+
+	if err := tx.WithContext(ctx).Delete(&course.CourseCustomer{}, "id = ?", id).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (r *courseCustomerRepository) GetAllCourseCustomerForExport(ctx context.Context, req dto.PaginationRequest) ([]dto.CourseCustomerExport, error) {

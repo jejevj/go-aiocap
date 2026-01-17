@@ -399,3 +399,15 @@
 15:11:10 | 200 |      4.6039ms | 127.0.0.1 | POST | /api/course-customer/export/ | -
 15:12:32 | 200 |      3.4724ms | 127.0.0.1 | POST | /api/course-customer/export/ | -
 15:12:41 | 200 |       3.401ms | 127.0.0.1 | POST | /api/course-customer/export/ | -
+15:13:50 | 200 |      5.9896ms | 127.0.0.1 | POST | /api/course-customer/export/ | -
+15:23:22 | 200 |      8.0542ms | 127.0.0.1 | GET | /api/course-customer/ | -
+15:29:46 | 405 |            0s | 127.0.0.1 | DELETE | /api/course-customer/ | Method Not Allowed
+15:29:58 | 401 |      1.6532ms | 127.0.0.1 | DELETE | /api/course-customer/ | -
+15:30:03 | 200 |       4.309ms | 127.0.0.1 | POST | /api/user/login | -
+15:30:13 | 400 |      4.0622ms | 127.0.0.1 | DELETE | /api/course-customer/ | -
+15:33:58 | 400 |      6.9869ms | 127.0.0.1 | DELETE | /api/course-customer/ | -
+15:35:06 | 400 |      5.5281ms | 127.0.0.1 | DELETE | /api/course-customer/ | -
+15:36:20 | 400 |      7.1075ms | 127.0.0.1 | DELETE | /api/course-customer/ | -
+15:36:21 | 400 |      1.1394ms | 127.0.0.1 | DELETE | /api/course-customer/ | -
+15:36:22 | 400 |      1.4831ms | 127.0.0.1 | DELETE | /api/course-customer/ | -
+15:37:02 | 200 |     14.8441ms | 127.0.0.1 | DELETE | /api/course-customer/ | -

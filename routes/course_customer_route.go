@@ -15,4 +15,5 @@ func CourseCustomer(route fiber.Router, courseCustomerController controller.Cour
 	routes.Post("/get-details", courseCustomerController.GetSingle)
 	routes.Get("", courseCustomerController.GetAllCC)
 	routes.Patch("", middleware.Authenticate(jwtService), courseCustomerController.Update)
+	routes.Delete("", middleware.Authenticate(jwtService), courseCustomerController.Delete)
 }

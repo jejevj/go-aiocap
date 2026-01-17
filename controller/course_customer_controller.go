@@ -17,6 +17,7 @@ type (
 	CourseCustomerController interface {
 		AddCourseCustomer(ctx *fiber.Ctx) error
 		Update(ctx *fiber.Ctx) error
+		Delete(ctx *fiber.Ctx) error
 		GetAllCC(ctx *fiber.Ctx) error
 		GetSingle(ctx *fiber.Ctx) error
 		ExportExcel(ctx *fiber.Ctx) error
@@ -79,6 +80,31 @@ func (c *courseCustomerController) Update(ctx *fiber.Ctx) error {
 	}
 
 	res := utils.BuildResponseSuccess(dto.MESSAGE_SUCCESS_UPDATE_USER, result)
+	return ctx.Status(http.StatusOK).JSON(res)
+}
+
+func (c *courseCustomerController) Delete(ctx *fiber.Ctx) error {
+	// userId := ctx.Locals("user_id").(string)
+	var req dto.CourseCustomerGetDetailsRequest
+
+	// Parse the request body into req
+	if err := ctx.BodyParser(&req); err != nil {
+		res := utils.BuildResponseFailed(dto.MESSAGE_FAILED_GET_DATA_FROM_BODY, err.Error(), nil)
+		return ctx.Status(http.StatusBadRequest).JSON(res)
+	}
+
+	result, err := c.userService.GetCourseCustomerById(ctx.Context(), req.ID.String())
+	if err != nil {
+		res := utils.BuildResponseFailed(dto.MESSAGE_FAILED_GET_USER, err.Error(), nil)
+		return ctx.Status(http.StatusBadRequest).JSON(res)
+	}
+
+	if err := c.userService.DeleteCourseCustomer(ctx.Context(), req, result.ID); err != nil {
+		res := utils.BuildResponseFailed(dto.MESSAGE_FAILED_DELETE_USER, err.Error(), nil)
+		return ctx.Status(http.StatusBadRequest).JSON(res)
+	}
+
+	res := utils.BuildResponseSuccess(dto.MESSAGE_SUCCESS_DELETE_USER, nil)
 	return ctx.Status(http.StatusOK).JSON(res)
 }
 
