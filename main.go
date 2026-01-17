@@ -37,7 +37,7 @@ func main() {
 
 		courseCustomerRepository repository.CourseCustomerRepository = repository.NewCourseCustomerRepository(db)
 		courseCustomerService    service.CourseCustomerService       = service.NewCourseCustomerService(courseCustomerRepository, jwtService)
-		courseCustomerController controller.CourseCustomerController = controller.NewCourseCustomerController(courseCustomerService)
+		courseCustomerController controller.CourseCustomerController = controller.NewCourseCustomerController(courseCustomerService, userService)
 
 		courseRepository repository.CourseRepository = repository.NewCourseRepository(db)
 		courseService    service.CourseService       = service.NewCourseService(courseRepository, courseCustomerRepository, jwtService)

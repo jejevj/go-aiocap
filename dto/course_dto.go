@@ -1,6 +1,8 @@
 package dto
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 )
 
@@ -11,6 +13,8 @@ type (
 		CourseLocatoin    string    `json:"course_location"`
 		CourseClient      uuid.UUID `json:"course_client"`
 		IsVerified        bool      `json:"is_verivied"`
+		StartDate         time.Time `json:"start_date"`
+		EndDate           time.Time `json:"end_date"`
 		CreatedByID       uuid.UUID `json:"created_by_id"`
 		ChangedByID       uuid.UUID `json:"changed_by_id"`
 	}
@@ -21,8 +25,10 @@ type (
 		CourseDescription string                 `json:"course_description"`
 		CourseLocatoin    string                 `json:"course_location"`
 		CourseClient      uuid.UUID              `json:"course_client"`
-		CourseCustomer    CourseCustomerResponse `json:"client_data"`
+		CourseCustomer    CourseCustomerResponse `json:"customer_data"`
 		IsVerified        bool                   `json:"is_verivied"`
+		StartDate         time.Time              `json:"start_date"`
+		EndDate           time.Time              `json:"end_date"`
 		CreatedByID       uuid.UUID              `json:"created_by_id"`
 		ChangedByID       uuid.UUID              `json:"changed_by_id"`
 	}

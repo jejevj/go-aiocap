@@ -1,6 +1,8 @@
 package course
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 	"github.com/jejevj/go-aiocap/entity"
 	"gorm.io/gorm"
@@ -15,6 +17,8 @@ type Course struct {
 	CreatedByID       uuid.UUID `gorm:"type:uuid;not null" json:"created_by_id"`
 	ChangedByID       uuid.UUID `gorm:"type:uuid;not null" json:"changed_by_id"`
 	IsVerified        bool      `json:"is_verified"`
+	StartDate         time.Time `json:"start_date"`
+	EndDate           time.Time `json:"end_date"`
 	// Relationship fields
 	CourseClientCustomer CourseCustomer `gorm:"foreignKey:CourseClient;references:ID" json:"course_client_customer,omitempty"`
 	CreatedByUser        entity.User    `gorm:"foreignKey:CreatedByID;references:ID" json:"created_by_user,omitempty"`
@@ -30,11 +34,5 @@ func (u *Course) BeforeCreate(tx *gorm.DB) error {
 		}
 	}()
 
-	// var err error
-	// // u.ID = uuid.New()
-	// u.Password, err = helpers.HashPassword(u.Password)
-	// if err != nil {
-	// 	return err
-	// }
 	return nil
 }

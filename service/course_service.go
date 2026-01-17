@@ -38,17 +38,18 @@ func (s *courseService) AddCourse(ctx context.Context, req dto.CourseCreateReque
 		CourseLocation:    req.CourseLocatoin,
 		CourseClient:      req.CourseClient,
 		IsVerified:        req.IsVerified,
+		StartDate:         req.StartDate,
+		EndDate:           req.EndDate,
 		CreatedByID:       req.CreatedByID,
 		ChangedByID:       req.ChangedByID,
 	}
-
-	userReg, err := s.customerRepo.AddCourse(ctx, customer)
+	// Fixed: Convert uuid.UUID to string for the ID parameter
+	clientDetails, err := s.cstRepo.GetCourseCustomerById(ctx, req.CourseClient.String()) // Fixed: removed string() conversion
 	if err != nil {
-		return dto.CourseResponse{}, dto.ErrCreateUser
+		return dto.CourseResponse{}, dto.ErrCreateCourseClientNotFound
 	}
 
-	// Fixed: Convert uuid.UUID to string for the ID parameter
-	clientDetails, err := s.cstRepo.GetCourseCustomerById(ctx, userReg.CourseClient.String()) // Fixed: removed string() conversion
+	userReg, err := s.customerRepo.AddCourse(ctx, customer)
 	if err != nil {
 		return dto.CourseResponse{}, dto.ErrCreateUser
 	}
@@ -71,6 +72,8 @@ func (s *courseService) AddCourse(ctx context.Context, req dto.CourseCreateReque
 			ChangedByID:     clientDetails.ChangedByID,
 		},
 		IsVerified:  userReg.IsVerified,
+		StartDate:   userReg.StartDate,
+		EndDate:     userReg.EndDate,
 		CreatedByID: userReg.CreatedByID,
 		ChangedByID: userReg.ChangedByID,
 	}, nil
