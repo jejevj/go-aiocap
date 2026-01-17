@@ -42,6 +42,10 @@ func main() {
 		courseRepository repository.CourseRepository = repository.NewCourseRepository(db)
 		courseService    service.CourseService       = service.NewCourseService(courseRepository, courseCustomerRepository, jwtService)
 		courseController controller.CourseController = controller.NewCourseController(courseService)
+
+		logRepository repository.LogRepository = repository.NewLogRepository(db)
+		logService    service.LogService       = service.NewLogService(logRepository)
+		logController controller.LogController = controller.NewLogController(logService)
 	)
 
 	server := fiber.New(fiber.Config{
@@ -66,11 +70,14 @@ func main() {
 	}))
 
 	server.Use(middleware.CORSMiddleware())
+
 	apiGroup := server.Group("/api")
+	apiGroup.Use(middleware.LoggingMiddleware(logService, jwtService))
 
 	routes.User(apiGroup, userController, jwtService)
 	routes.CourseCustomer(apiGroup, courseCustomerController, jwtService)
 	routes.Course(apiGroup, courseController, jwtService)
+	routes.Log(apiGroup, logController, jwtService)
 
 	server.Get("/swagger/*", fiberSwagger.WrapHandler)
 	server.Static("/assets", "./assets")

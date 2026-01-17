@@ -28,6 +28,7 @@ func Migrate(db *gorm.DB) error {
 		&course.Course{},
 		&course.CourseKehadiran{},
 		&course.CoursePeserta{},
+		&entity.SystemLog{},
 	); err != nil {
 		return err
 	}
