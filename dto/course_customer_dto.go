@@ -1,8 +1,6 @@
 package dto
 
 import (
-	"time"
-
 	"github.com/google/uuid"
 	"github.com/jejevj/go-aiocap/entity/course"
 )
@@ -41,8 +39,6 @@ type (
 		CustomerAddress string    `json:"customer_address"`
 		CreatedByID     uuid.UUID `json:"created_by_id"`
 		ChangedByID     uuid.UUID `json:"changed_by_id"`
-		CreatedAt       time.Time `json:"created_at"`
-		UpdatedAt       time.Time `json:"updated_at"`
 	}
 
 	CourseCustomerPaginationResponse struct {
@@ -61,7 +57,5 @@ type (
 		ContactName     string `json:"contact_name"`
 		PhoneNumber     string `json:"phone_number"`
 		CustomerAddress string `json:"customer_address"`
-		CreatedAt       string `json:"created_at"`
-		UpdatedAt       string `json:"updated_at"`
 	}
 )

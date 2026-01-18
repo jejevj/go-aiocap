@@ -178,8 +178,6 @@ func (r *courseCustomerRepository) GetAllCourseCustomerForExport(ctx context.Con
 			ContactName:     customer.ContactName,
 			PhoneNumber:     customer.PhoneNumber,
 			CustomerAddress: customer.CustomerAddress,
-			CreatedAt:       customer.CreatedAt.Format("2006-01-02 15:04:05"),
-			UpdatedAt:       customer.UpdatedAt.Format("2006-01-02 15:04:05"),
 		})
 	}
 

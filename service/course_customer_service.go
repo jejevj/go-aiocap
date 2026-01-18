@@ -214,8 +214,6 @@ func (s *courseCustomerService) createExcelFile(data []dto.CourseCustomerExport)
 		f.SetCellValue("Sheet1", fmt.Sprintf("C%d", row), record.ContactName)
 		f.SetCellValue("Sheet1", fmt.Sprintf("D%d", row), record.PhoneNumber)
 		f.SetCellValue("Sheet1", fmt.Sprintf("E%d", row), record.CustomerAddress)
-		f.SetCellValue("Sheet1", fmt.Sprintf("F%d", row), record.CreatedAt)
-		f.SetCellValue("Sheet1", fmt.Sprintf("G%d", row), record.UpdatedAt)
 	}
 
 	// Save to buffer

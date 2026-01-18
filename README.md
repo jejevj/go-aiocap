@@ -7,6 +7,15 @@ This is a fork from https://github.com/Caknoooo/go-gin-clean-starter but rewritt
 
 Clean Architecture proposes a structured application design with several layers that have clear and isolated responsibilities. Each layer has a specific role and boundaries. Here are some common layers in Golang Clean Architecture:
 
+## Step By Step to Develop
+1. Create Entity
+2. Do Migration
+3. Create DTO
+4. Create Repository
+5. Create Service
+6. Create Controller
+7. Register all of it on main.go
+
 ## Directory / Layers 🔥
 - **Config**: Aims to be directly related to things outside the code, such as databases. Configuration files play a crucial role in customizing the behavior of software applications. A well-structured config file can simplify the process of fine-tuning various settings to meet specific project requirements.
 
@@ -115,11 +124,3 @@ swag init
 This command will creating the docs folder with the swagger documentation.
 
 
-## Step By Step to Develope
-1. Create Entity
-2. Do Migration
-3. Create DTO
-4. Create Repository
-5. Create Service
-6. Create Controller
-7. Register all of it on main.go
